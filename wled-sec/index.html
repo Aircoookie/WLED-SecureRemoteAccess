@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/akemi.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WLED Secure Remote Access</title>
+  </head>
+  <body>
+    <h1>Secure Remote Access</h1>
+    Password<br>
+    <input type="password" id="password" /><br>
+    Iterations<br>
+    <input type="number" id="iterations" value="1000000" /><br>
+    <button id="hashButton">Hash password</button><br>
+    Hash (=psk) <span id="hash"></span><br>
+    <span id="info"></span><br><br>
+    Message<br>
+    <input type="text" id="message" /><br>
+    <button id="hmacButton">Gen HMAC</button><br>
+    HMAC <span id="hmac"></span><br>
+    <span id="hmacInfo"></span><br>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
