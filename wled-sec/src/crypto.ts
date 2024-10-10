@@ -36,7 +36,8 @@ async function getPBKDF2DerivedKey(passwordBuffer: Uint8Array, saltBuffer: Uint8
   // Type of derived key - used for HMAC generation
   var hmacPars = {
       name: 'HMAC',
-      hash: 'SHA-256'
+      hash: 'SHA-256',
+      length: 256
   }
   const derivedKey = await crypto.subtle.deriveKey(pars, inputKey, hmacPars, true, ['sign', 'verify'])
 
@@ -53,7 +54,7 @@ async function getPBKDF2DerivedKey(passwordBuffer: Uint8Array, saltBuffer: Uint8
   return derivedKey;
 }
 
-async function generateHMAC(message: string, key: CryptoKey) {
+async function generateHMAC(message: string, key: CryptoKey) : Promise<string> {
   var start = performance.now();
 
   const messageBuffer = new TextEncoder().encode(message);
@@ -66,13 +67,15 @@ async function generateHMAC(message: string, key: CryptoKey) {
   var end = performance.now();
   document.getElementById('hmacInfo')!.textContent = 'HMAC generation took ' + (end - start) + ' ms';
   document.getElementById('hmac')!.textContent = hash;
+  return hash;
 }
 
-export async function signMessage() {
-  var message = (<HTMLInputElement>document.getElementById('message')).value;
-  if (!derivedKey) {
-    alert('Please hash the password first');
-    return;
+export async function signMessage(message?: string) : Promise<string> {
+  if (!message) {
+    message = (<HTMLInputElement>document.getElementById('message')).value;
   }
-  generateHMAC(message, derivedKey);
+  if (!derivedKey) {
+    throw new Error('Please hash the password first');
+  }
+  return generateHMAC(message, derivedKey);
 }
