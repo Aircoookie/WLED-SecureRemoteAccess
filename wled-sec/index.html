@@ -7,23 +7,26 @@
     <title>WLED Secure Remote Access</title>
   </head>
   <body>
-    <h1>Secure Remote Access</h1>
-    Password<br>
-    <input type="password" id="password" /><br>
-    Iterations<br>
-    <input type="number" id="iterations" value="1000000" /><br>
-    <button id="hashButton">Hash password</button><br>
-    Hash (=psk) <span id="hash"></span><br>
-    <span id="info"></span><br><br>
-    Message<br>
-    <input type="text" id="message" /><br>
-    <button id="hmacButton">Gen HMAC</button><br>
-    HMAC <span id="hmac"></span><br>
-    <span id="hmacInfo"></span><br><br>
+    <h2>WLED Secure Remote Access</h2>
     Instance address<br>
     <input type="text" id="hostInput" /><br>
+    Password<br>
+    <input type="password" id="password" /><br>
     <button id="connectButton">Connect</button><br>
     <span id="connectionInfo"></span><br>
+    <a id="testingToggle">Show testing controls</a>
+    <div id="testingDiv">
+      PBKDF2 Iterations<br>
+      <input type="number" id="iterations" value="1000000" /><br>
+      <button id="hashButton">Hash password</button><br>
+      Hash (=psk) <span id="hash"></span><br>
+      <span id="info"></span><br><br>
+      Message<br>
+      <input type="text" id="message" /><br>
+      <button id="hmacButton">Gen HMAC</button><br>
+      HMAC <span id="hmac"></span><br>
+      <span id="hmacInfo"></span><br><br>
+    </div>
     
     <script type="module" src="/src/main.ts"></script>
   </body>

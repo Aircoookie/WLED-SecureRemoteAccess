@@ -20,3 +20,42 @@ button {
   border: 0px solid white;
   border-radius: 25px;
 }
+
+a {
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#testingDiv {
+  display: none;
+}
+
+input[type=number],
+input[type=text],
+input[type=password] {
+	background: #333;
+	color: white;
+	border: 0 solid #222;
+	border-radius: 50px;
+	padding: 7px 2px;
+  margin-bottom: 8px;
+	font-size: 19px;
+	transition: background-color .2s;
+	outline: 0;
+	-webkit-appearance: textfield;
+	-moz-appearance: textfield;
+	appearance: textfield;
+  text-align: center;
+}
+
+input[type=number]:focus,
+input[type=text]:focus,
+input[type=password]:focus {
+	background: #555;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+}

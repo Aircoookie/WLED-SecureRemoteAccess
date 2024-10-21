@@ -16,7 +16,7 @@ export function handleMessageEvent(event : MessageEvent) {
     //return;
   } else if (json['wled-ui'] === 'hmac-req') {
     signMessage(JSON.stringify(json['msg'])).then((signature) => {
-      var msgObject = {'wled-rc':'hmac', 'msg': json['msg'], 'sig': signature};
+      var msgObject = {'wled-rc':'hmac', 'msg': json['msg'], 'mac': signature};
       event.source!.postMessage(JSON.stringify(msgObject), {'targetOrigin':event.origin});
     });
   }
