@@ -1,4 +1,4 @@
-import { signMessage } from "./crypto";
+import { signMessage, nonceCounter, getSessionId, setSessionId } from "./crypto";
 
 export function handleMessageEvent(event : MessageEvent) {
   console.log(`Received message: ${event.data}`);
@@ -13,8 +13,12 @@ export function handleMessageEvent(event : MessageEvent) {
   }
   if (json['wled-ui'] === 'onload') {
     event.source!.postMessage('{"wled-rc":"ready"}', {'targetOrigin':event.origin});
-    //return;
+  }
+  else if (json['wled-ui'] === 'sid') {
+    setSessionId(json['sid']);
   } else if (json['wled-ui'] === 'hmac-req') {
+    // include nonce in msg
+    json['msg']['nc'] = {"sid":getSessionId(), "c":nonceCounter()};
     signMessage(JSON.stringify(json['msg'])).then((signature) => {
       var msgObject = {'wled-rc':'hmac', 'msg': json['msg'], 'mac': signature};
       event.source!.postMessage(JSON.stringify(msgObject), {'targetOrigin':event.origin});

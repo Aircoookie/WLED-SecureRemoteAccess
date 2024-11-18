@@ -79,3 +79,20 @@ export async function signMessage(message?: string) : Promise<string> {
   }
   return generateHMAC(message, derivedKey);
 }
+
+var counter : number = 0;
+var sessionId : string = '00';
+
+export function nonceCounter() {
+  counter++;
+  return counter;
+}
+
+export function getSessionId() {
+  return sessionId;
+}
+
+export function setSessionId(sid: string) {
+  // TODO check whether sid is a valid hex string
+  sessionId = sid;
+}
